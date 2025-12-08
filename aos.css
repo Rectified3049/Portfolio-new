@@ -1,0 +1,66 @@
+/* Lightweight AOS (Animate On Scroll) - aos.css
+   - Put this file next to your other CSS files and include it after `style.css` in <head>
+   - Provides fade, slide, zoom, and text reveal animations.
+*/
+
+/* Base hidden state for elements with data-aos */
+[data-aos] {
+  opacity: 0;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-duration: 700ms;
+  transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+/* When JS adds the "aos-animate" class, element becomes visible */
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: none;
+}
+
+/* Specific starting transforms for named animations */
+[data-aos="fade-up"] { transform: translateY(18px) scale(0.995); }
+[data-aos="fade-down"] { transform: translateY(-18px) scale(0.995); }
+[data-aos="fade-left"] { transform: translateX(-18px) scale(0.995); }
+[data-aos="fade-right"] { transform: translateX(18px) scale(0.995); }
+[data-aos="slide-left"] { transform: translateX(-24px); }
+[data-aos="slide-right"] { transform: translateX(24px); }
+[data-aos="zoom-in"] { transform: scale(0.92); }
+[data-aos="zoom-out"] { transform: scale(1.06); }
+
+/* Text reveal: wrap text in .aos-text (see examples). Initial state masks content */
+[data-aos="text-reveal"] { overflow: hidden; }
+[data-aos="text-reveal"] .aos-text {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 700ms cubic-bezier(0.2,0.9,0.2,1);
+}
+[data-aos="text-reveal"].aos-animate .aos-text {
+  transform: translateY(0%);
+}
+
+/* Stagger helper: you can still set inline style or data attributes; default transition-delay is 0 */
+
+/* Accessibility: respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos], [data-aos] .aos-text {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Utility small tweaks for mobile performance */
+@media (max-width: 480px) {
+  [data-aos] { transition-duration: 520ms; }
+  [data-aos] .aos-text { transition-duration: 520ms; }
+}
+
+/* Optional: simple helper class to delay stagger when needed */
+.aos-delay-100 { transition-delay: 100ms; }
+.aos-delay-200 { transition-delay: 200ms; }
+.aos-delay-300 { transition-delay: 300ms; }
+.aos-delay-400 { transition-delay: 400ms; }
+.aos-delay-500 { transition-delay: 500ms; }
